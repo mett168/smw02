@@ -1,6 +1,13 @@
-// src/app/invite/[code]/page.tsx
 import InviteRedirectClient from "./InviteRedirectClient";
 
-export default function InvitePage({ params }: { params: { code: string } }) {
+// ✅ 타입을 명확하게 선언
+type PageProps = {
+  params: {
+    code: string;
+  };
+};
+
+export default function InvitePage({ params }: PageProps) {
   return <InviteRedirectClient code={params.code} />;
 }
+
