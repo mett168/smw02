@@ -1,13 +1,16 @@
+// 📄 src/app/invite/[code]/page.tsx
+
 import InviteRedirectClient from "./InviteRedirectClient";
 
-// ✅ 타입을 명확하게 선언
-type PageProps = {
+interface InvitePageProps {
   params: {
     code: string;
   };
-};
+}
 
-export default function InvitePage({ params }: PageProps) {
+// ✅ 타입을 확정하고 `async` 제거 (Server Component에서 client 컴포넌트로 넘김)
+export default function InvitePage({ params }: InvitePageProps) {
   return <InviteRedirectClient code={params.code} />;
 }
+
 
