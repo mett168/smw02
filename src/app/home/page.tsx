@@ -76,7 +76,7 @@ export default function HomePage() {
             tx_hash: "auto-detect",
             status: "completed",
           },
-        ], { upsert: false });
+        ]);
 
         if (!error) {
           console.log("✅ 자동 입금 기록 완료:", { walletAddress, refCode, diff });
