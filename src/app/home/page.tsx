@@ -170,8 +170,13 @@ export default function HomePage() {
       onConflict: "ref_code",
     });
 
-    if (!error) setNftBalances(balances);
-  };
+ if (!error) {
+  setNftBalances({
+    nft300: balances["nft300"] || 0,
+    nft3000: balances["nft3000"] || 0,
+    nft10000: balances["nft10000"] || 0,
+  });
+}
 
   const fetchUserInfo = async () => {
     const { data } = await supabase
