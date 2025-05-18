@@ -177,7 +177,7 @@ export default function HomePage() {
     nft10000: balances["nft10000"] || 0,
   });
 }
-
+}
   const fetchUserInfo = async () => {
     const { data } = await supabase
       .from("users")
