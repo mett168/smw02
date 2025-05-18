@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import { NextResponse } from "next/server";
 import { calculateAndRecordRewards } from "@/lib/calculateAndRecordRewards";
+import { saveRewardTransfersSnapshot } from "@/lib/saveRewardTransfersSnapshot";
 
 function getTodayDate() {
   const now = new Date();
