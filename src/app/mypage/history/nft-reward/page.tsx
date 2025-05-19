@@ -19,18 +19,22 @@ export default function NftRewardHistoryPage() {
       const wallet = account.address.toLowerCase();
 
       // ✅ 1. NFT 보유 현황
-      const { data: nftData } = await supabase
-        .from("nfts")
-        .select("nft_type, quantity")
-        .eq("owner_wallet", wallet);
+type NftType = "snow300" | "snow3000" | "snow10000";
 
-      const balances = { snow300: 0, snow3000: 0, snow10000: 0 };
-      nftData?.forEach((nft) => {
-        if (nft.nft_type in balances) {
-          balances[nft.nft_type] += nft.quantity;
-        }
-      });
-      setNftBalances(balances);
+const balances: Record<NftType, number> = {
+  snow300: 0,
+  snow3000: 0,
+  snow10000: 0,
+};
+
+nftData?.forEach((nft) => {
+  const type = nft.nft_type as NftType;
+  if (type in balances) {
+    balances[type] += nft.quantity;
+  }
+});
+
+setNftBalances(balances);
 
       // ✅ 2. 오늘 투자 리워드
       const { data: rewardData } = await supabase
