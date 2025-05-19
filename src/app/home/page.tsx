@@ -273,7 +273,7 @@ export default function HomePage() {
                 <div>
                   <p className="font-semibold text-gray-800">{nft.name}</p>
                   <p className="text-sm text-gray-500">
-                    보유 수량: <span className="text-blue-600 font-bold">{nftBalances[nft.type]}개</span>
+                    보유 수량: <span className="text-blue-600 font-bold">{nftBalances[nft.type as keyof typeof nftBalances]}개</span>
                   </p>
                 </div>
               </div>
