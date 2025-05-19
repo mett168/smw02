@@ -6,9 +6,11 @@ import { useActiveAccount } from "thirdweb/react";
 import BottomNav from "@/components/BottomNav";
 import TopBar from "@/components/TopBar";
 import { supabase } from "@/lib/supabaseClient";
+import { useActiveWallet } from "thirdweb/react";
 
 export default function MyPage() {
   const account = useActiveAccount();
+  const wallet = useActiveWallet();
   const router = useRouter();
 
   const [userData, setUserData] = useState<any>(null);
@@ -57,22 +59,26 @@ export default function MyPage() {
     );
   }
 
-  const handleLogout = async () => {
-    localStorage.setItem("logged_out", "true");
-    localStorage.removeItem("thirdweb:active-chain");
-    localStorage.removeItem("thirdweb:active-wallet-id");
-    localStorage.removeItem("thirdweb:connected-wallet-ids");
-    localStorage.removeItem("lastAuthProvider");
+const handleLogout = async () => {
+  localStorage.setItem("logged_out", "true");
+  localStorage.removeItem("thirdweb:active-chain");
+  localStorage.removeItem("thirdweb:active-wallet-id");
+  localStorage.removeItem("thirdweb:connected-wallet-ids");
+  localStorage.removeItem("lastAuthProvider");
 
-    for (const key in localStorage) {
-      if (key.startsWith("walletToken-")) {
-        localStorage.removeItem(key);
-      }
+  for (const key in localStorage) {
+    if (key.startsWith("walletToken-")) {
+      localStorage.removeItem(key);
     }
+  }
 
-    await account.client?.wallet().disconnect();
-    window.location.replace("/");
-  };
+  if (wallet) {
+    await wallet.disconnect();
+  }
+
+  window.location.replace("/");
+};
+
 
   return (
     <>
