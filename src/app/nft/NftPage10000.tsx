@@ -11,7 +11,7 @@ import NftTransferBox from "@/components/NftTransferBox";
 import { NftBurnBox } from "@/components/NftBurnBox";
 
 const CONTRACT_ADDRESS = "0xc925cd3fbbc506b69204fe97329c6b2b33d17f99"; // SNOWBOT10000 주소
-const TOKEN_ID = 3;
+const TOKEN_ID = 3n;
 
 export default function NftPage10000() {
   const account = useActiveAccount();
