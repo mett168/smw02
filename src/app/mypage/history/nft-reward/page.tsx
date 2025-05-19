@@ -18,14 +18,19 @@ export default function NftRewardHistoryPage() {
     const fetchData = async () => {
       const wallet = account.address.toLowerCase();
 
-      // ✅ 1. NFT 보유 현황
+// ✅ 1. NFT 보유 현황
 type NftType = "snow300" | "snow3000" | "snow10000";
-
 const balances: Record<NftType, number> = {
   snow300: 0,
   snow3000: 0,
   snow10000: 0,
 };
+
+// 🛠️ 여기서 먼저 data를 가져온 뒤에 변수에 할당해야 함
+const { data: nftData } = await supabase
+  .from("nfts")
+  .select("nft_type, quantity")
+  .eq("owner_wallet", wallet);
 
 nftData?.forEach((nft) => {
   const type = nft.nft_type as NftType;
